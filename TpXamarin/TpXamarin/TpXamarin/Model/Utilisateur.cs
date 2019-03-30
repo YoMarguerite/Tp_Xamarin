@@ -1,19 +1,56 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.ComponentModel;
+using SQLite;
 
 namespace TpXamarin.Model
 {
     public class Utilisateur
     {
-        public int Id { get; set; }
+        private int id;
 
-        public string Nom { get; set; }
+        [PrimaryKey, AutoIncrement]
+        public int ID
+        {
+            get { return id; }
+            set { id = value; }
+        }
 
-        public string Prenom { get; set; }
 
-        public string Login { get; set; }
+        private string nom;
 
-        public string Mdp{ get; set; }
-    }
+        [NotNull, MaxLength(50)]
+        public string Nom
+        {
+            get { return nom; }
+            set { nom = value; }
+        }
+
+
+        private string prenom;
+
+        [NotNull, MaxLength(50)]
+        public string Prenom
+        {
+            get { return prenom; }
+            set { prenom = value; }
+        }
+
+
+        private string login;
+
+        [NotNull, MaxLength(50)]
+        public string Login
+        {
+            get { return login; }
+            set { login = value; }
+        }
+
+
+        private string mdp;
+
+        [NotNull, MaxLength(50)]
+        public string Mdp
+        {
+            get { return mdp; }
+            set { mdp = value; }
+        }    }
 }

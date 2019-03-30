@@ -10,11 +10,27 @@ using Xamarin.Forms.Xaml;
 namespace TpXamarin
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ListeProduit : ContentView
+	public partial class ListeProduit : ContentPage
 	{
-		public ListeProduit ()
-		{
-			InitializeComponent ();
-		}
-	}
+        public AnnonceDataAccess AnnonceData;
+
+        public ListeProduit()
+        {
+            InitializeComponent();
+            AnnonceData = new AnnonceDataAccess();
+            AnnonceList.ItemsSource = AnnonceData.Annonces;
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            AnnonceData.AddNewAnnonce();
+            AnnonceList.ItemsSource = AnnonceData.Annonces;
+        }
+
+        private void Button_Clicked_1(object sender, EventArgs e)
+        {
+            AnnonceData.DeleteAllAnnonces();
+            AnnonceList.ItemsSource = AnnonceData.Annonces;
+        }
+    }
 }

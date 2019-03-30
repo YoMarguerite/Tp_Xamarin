@@ -5,10 +5,14 @@
              x:Class="TpXamarin.MainPage">
 
     <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
+        <Label Text="Connexion"
+                VerticalOptions="Center" 
+                HorizontalOptions="CenterAndExpand" />
+        <Entry x:Name="login" Placeholder="Login"/>
+        <Entry x:Name="password" Placeholder="Mot de passe"/>
+        <Button Text="Valider"  Clicked="Button_Clicked"/>
+        <Button Text="Inscription" Clicked="Button_Clicked_1"/>
     </StackLayout>
+        
 
 </ContentPage>

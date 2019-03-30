@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TpXamarin.Inscription">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Inscription"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+            
+            <Label x:Name="errornom" Text="" TextColor="Red"/>
+            <Entry x:Name="nom" Placeholder="Nom"/>
+            
+            <Label x:Name="errorprenom" Text="" TextColor="Red"/>
+            <Entry x:Name="prenom" Placeholder="Prénom"/>
+            
+            <Label x:Name="errorlogin" Text="" TextColor="Red"/>
+            <Entry x:Name="login" Placeholder="Login"/>
+
+            <Label x:Name="errormdp" Text="" TextColor="Red"/>
+            <Entry x:Name="mdp" Placeholder="Mot de passe"/>
+
+            <Label x:Name="errorremdp" Text="" TextColor="Red"/>
+            <Entry x:Name="remdp" Placeholder="Confirmez"/>
+            
+            <Button Text="Validez" Clicked="Button_Clicked"/>
+            <Button Text="Connexion" Clicked="Button_Clicked_1"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
