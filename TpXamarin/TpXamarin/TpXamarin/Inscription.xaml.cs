@@ -34,7 +34,8 @@ namespace TpXamarin
                 };
                 user.ID = utilisateurData.SaveUtilisateur(user);
                 UtilisateurActif.Utilisateur = user;
-                await this.Navigation.PushAsync(new ListeProduit());
+                Navigation.InsertPageBefore(new ListeProduit(), this);
+                await Navigation.PopAsync();
             }
         }
 
@@ -42,39 +43,59 @@ namespace TpXamarin
         {
             bool verif = true;
 
-            if (nom.Text == null)
+            if (nom.Text == "")
             {
                 errornom.Text = "Veuillez remplir ce champ";
                 verif = false;
             }
+            else
+            {
+                errornom.Text = "";
+            }
 
-            if (prenom.Text == null)
+            if (prenom.Text == "")
             {
                 errorprenom.Text = "Veuillez remplir ce champ";
                 verif = false;
             }
-
-            if (login.Text == null)
+            else
+            {
+                errorprenom.Text = ""; 
+            }
+            
+            if (login.Text == "")
             {
                 errorlogin.Text = "Veuillez remplir ce champ";
                 verif = false;
             }
-            else if (utilisateurData.GetFilteredUtilisateurs(login.Text) != null)
+            else if (utilisateurData.GetFilteredUtilisateurs(login.Text).Count() != 0)
             {
                 errorlogin.Text = "Login déjà utilisé";
                 verif = false;
             }
+            else
+            {
+                errorlogin.Text = "";
+            }
 
-            if (mdp.Text == null)
+            if (mdp.Text == "")
             {
                 errormdp.Text = "Veuillez remplir ce champ";
                 verif = false;
             }
+            else
+            {
+                errormdp.Text = "";
+            }
 
             if (remdp.Text != mdp.Text)
             {
-                errorremdp.Text = "Ne correspond pas";
+                errorremdp.Text = "Les champs de mot de passe ne correspondent pas";
                 verif = false;
+            }
+            else
+            {
+                errorremdp.Text = "";
             }
 
             return verif;
@@ -82,8 +103,8 @@ namespace TpXamarin
 
         private async void Button_Clicked_1(object sender, EventArgs e)
         {
-            await this.Navigation.PopAsync(true);
-            await this.Navigation.PushAsync(new MainPage());
+            Navigation.InsertPageBefore(new MainPage(), this);
+            await Navigation.PopAsync();
         }
     }
 }

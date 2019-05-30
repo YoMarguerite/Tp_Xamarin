@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using TpXamarin.Model;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -18,19 +18,26 @@ namespace TpXamarin
         {
             InitializeComponent();
             AnnonceData = new AnnonceDataAccess();
-            AnnonceList.ItemsSource = AnnonceData.Annonces;
+            AnnonceList.ItemsSource = AnnonceData.NotMyAnnonces(UtilisateurActif.Utilisateur.ID);
+        }
+        
+        private async void AnnonceList_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            await this.Navigation.PushAsync(new DetailAnnonce(((Annonce)AnnonceList.SelectedItem).ID));
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
+        private void Entry_PropertyChanging(object sender, PropertyChangingEventArgs e)
         {
-            AnnonceData.AddNewAnnonce();
-            AnnonceList.ItemsSource = AnnonceData.Annonces;
+            if(recherche.Text != null)
+            {
+                AnnonceList.ItemsSource = AnnonceData.GetFilteredAnnonces(recherche.Text, UtilisateurActif.Utilisateur.ID);
+            }
         }
 
-        private void Button_Clicked_1(object sender, EventArgs e)
+        private async void Button_Clicked(object sender, EventArgs e)
         {
-            AnnonceData.DeleteAllAnnonces();
-            AnnonceList.ItemsSource = AnnonceData.Annonces;
+            await this.Navigation.PushAsync(new MyAnnonce());
         }
+        
     }
 }

@@ -7,9 +7,11 @@
     <StackLayout>
         <Label Text="Connexion"
                 VerticalOptions="Center" 
-                HorizontalOptions="CenterAndExpand" />
+                HorizontalOptions="CenterAndExpand"
+                FontSize="Large"/>
         <Entry x:Name="login" Placeholder="Login"/>
-        <Entry x:Name="password" Placeholder="Mot de passe"/>
+        <Entry x:Name="password" Placeholder="Mot de passe" IsPassword="True"/>
+        <Label x:Name="error"/>
         <Button Text="Valider"  Clicked="Button_Clicked"/>
         <Button Text="Inscription" Clicked="Button_Clicked_1"/>
     </StackLayout>

@@ -18,41 +18,61 @@ namespace TpXamarin
 
         public AnnonceDataAccess()
         {
-            database =
-                DependencyService.Get<IDatabaseConnection>().
-                DbConnection();
+            database =  DependencyService.Get<IDatabaseConnection>().DbConnection();
             database.CreateTable<Annonce>();
-
-            this.Annonces =
-                new ObservableCollection<Annonce>(database.Table<Annonce>());
+            Console.WriteLine("hoofjf");
+            this.Annonces = new ObservableCollection<Annonce>(database.Table<Annonce>());
 
             if (!database.Table<Annonce>().Any())
             {
-                AddNewAnnonce();
+                addnewannonce();
             }
         }
 
-        public void AddNewAnnonce()
+        public void addnewannonce()
         {
-            var i =SaveAnnonce(new Annonce
+            var i = SaveAnnonce(new Annonce
             {
                 Titre = "Titre...",
-                Description="Description...",
+                Description = "Description...",
                 Prix = 500,
                 Contact = "Numéro de téléphone...",
                 Categorie = "Console & Jeux Vidéos",
                 Date = new DateTime().ToString(),
-                User = 0
+                User = 0,
+                UserName = "Nobody"
             });
             this.Annonces.Add(GetAnnonce(i));
         }
 
-        public IEnumerable<Annonce> GetFilteredAnnonces(string Titre)
+        public IEnumerable<Annonce> GetFilteredAnnonces(string Titre, int id)
         {
             lock(collisionLock)
             {
                 var query = from annonce in database.Table<Annonce>()
-                            where annonce.Titre == Titre
+                            where annonce.Titre.Contains(Titre) && annonce.User != id
+                            select annonce;
+                return query.AsEnumerable();
+            }
+        }
+
+        public IEnumerable<Annonce> NotMyAnnonces(int id)
+        {
+            lock (collisionLock)
+            {
+                var query = from annonce in database.Table<Annonce>()
+                            where annonce.User != id
+                            select annonce;
+                return query.AsEnumerable();
+            }
+        }
+
+        public IEnumerable<Annonce> MyAnnonces(int id)
+        {
+            lock (collisionLock)
+            {
+                var query = from annonce in database.Table<Annonce>()
+                            where annonce.User == id
                             select annonce;
                 return query.AsEnumerable();
             }

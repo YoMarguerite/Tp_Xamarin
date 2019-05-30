@@ -6,7 +6,8 @@
         <StackLayout>
             <Label Text="Inscription"
                 VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+                HorizontalOptions="CenterAndExpand" 
+                   FontSize="Large"/>
             
             <Label x:Name="errornom" Text="" TextColor="Red"/>
             <Entry x:Name="nom" Placeholder="Nom"/>
@@ -18,10 +19,10 @@
             <Entry x:Name="login" Placeholder="Login"/>
 
             <Label x:Name="errormdp" Text="" TextColor="Red"/>
-            <Entry x:Name="mdp" Placeholder="Mot de passe"/>
+            <Entry x:Name="mdp" Placeholder="Mot de passe" IsPassword="True"/>
 
             <Label x:Name="errorremdp" Text="" TextColor="Red"/>
-            <Entry x:Name="remdp" Placeholder="Confirmez"/>
+            <Entry x:Name="remdp" Placeholder="Confirmez" IsPassword="True"/>
             
             <Button Text="Validez" Clicked="Button_Clicked"/>
             <Button Text="Connexion" Clicked="Button_Clicked_1"/>

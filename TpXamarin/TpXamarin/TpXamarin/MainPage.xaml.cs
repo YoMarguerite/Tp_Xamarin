@@ -1,5 +1,6 @@
 ﻿using System;
 using TpXamarin.DAL;
+using TpXamarin.Model;
 using Xamarin.Forms;
 
 namespace TpXamarin
@@ -13,6 +14,10 @@ namespace TpXamarin
             this.Navigation.PopAsync(true);
             InitializeComponent();
             UtilisateurData = new UtilisateurDataAccess();
+            foreach(Utilisateur user in UtilisateurData.GetUtilisateurs())
+            {
+                error.Text += "login : " + user.Login + " , mdp : " + user.Mdp;
+            }
         }
 
         private async void Button_Clicked(object sender, EventArgs e)
@@ -22,13 +27,16 @@ namespace TpXamarin
             if(user != null)
             {
                 UtilisateurActif.Utilisateur = user;
-                await this.Navigation.PushAsync(new ListeProduit());
+                Navigation.InsertPageBefore(new ListeProduit(), this);
+                await Navigation.PopAsync();
             }
+            error.Text = "Login ou Mot de passe incorrect.";
         }
 
         private async void Button_Clicked_1(object sender, EventArgs e)
         {
-            await this.Navigation.PushAsync(new Inscription());
+            Navigation.InsertPageBefore(new Inscription(), this);
+            await Navigation.PopAsync();
         }
     }
 }

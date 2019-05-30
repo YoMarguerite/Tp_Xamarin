@@ -28,6 +28,16 @@ namespace TpXamarin.DAL
             
         }
 
+        public IEnumerable<Utilisateur> GetUtilisateurs()
+        {
+            lock (collisionLock)
+            {
+                var query = from utilisateur in database.Table<Utilisateur>()
+                            select utilisateur;
+                return query.AsEnumerable();
+            }
+        }
+
         public IEnumerable<Utilisateur> GetFilteredUtilisateurs(string Login)
         {
             lock (collisionLock)

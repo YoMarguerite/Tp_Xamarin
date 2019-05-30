@@ -4,9 +4,15 @@
              x:Class="TpXamarin.ListeProduit">
   <ContentPage.Content>
       <StackLayout>
-            <Button Text="Nouveau" Clicked="Button_Clicked"></Button>
-            <Button Text="Supprimer" Clicked="Button_Clicked_1"></Button>
-            <ListView x:Name="AnnonceList">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Text="Mes annonces" Clicked="Button_Clicked"></Button>
+                <Entry Grid.Column="1" x:Name="recherche" Placeholder="Rechercher" PropertyChanging="Entry_PropertyChanging"/>
+            </Grid>
+            <ListView x:Name="AnnonceList" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -15,16 +21,18 @@
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Label Grid.Column="0" Grid.Row="1"  Text="{Binding Description}"/>
-                                    <Label Grid.Column="1" Grid.Row="1" Text="{Binding Prix, StringFormat='\{0:C2\}'}"/>
-                                    <Label Grid.Column="1" Grid.Row="0" Text="{Binding ID, StringFormat='\{0:#\}'}"/>
+                                    
                                     <Label Grid.Column="0" Grid.Row="0" Text="{Binding Titre}"/>
-
+                                    <Label Grid.Column="1" Grid.Row="0" Text="{Binding Prix, StringFormat='\{0:C2\}'}"/>
+                                    <Label Grid.ColumnSpan="2" Grid.Row="1" Text="{Binding Categorie}"/>
+                                    <Label Grid.Column="0" Grid.Row="2" Text="{Binding Date, StringFormat='Publié le \{0:dddd dd MMMM yyyy}'}"/>
+                                    <Label Grid.Column="1" Grid.Row="2" Text="{Binding UserName, StringFormat='Publié par '}"/>
                                 </Grid>
                             </ViewCell.View>
                         </ViewCell>

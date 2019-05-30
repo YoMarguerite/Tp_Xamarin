@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TpXamarin.CreateAnnonce">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Création"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+
+            <Label x:Name="errortitre" Text="" TextColor="Red"/>
+            <Entry x:Name="titre" Placeholder="Titre"/>
+
+            <Label x:Name="errordescription" Text="" TextColor="Red"/>
+            <Entry x:Name="description" Placeholder="Description"/>
+
+            <Label x:Name="errorprix" Text="" TextColor="Red"/>
+            <Entry x:Name="prix" Placeholder="Prix"/>
+
+            <Label x:Name="errorcontact" Text="" TextColor="Red"/>
+            <Entry x:Name="contact" Placeholder="Numéro de tel"/>
+
+            <ListView x:Name="categorie">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Label Text="{Binding .}"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Button Text="Validez" Clicked="Button_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

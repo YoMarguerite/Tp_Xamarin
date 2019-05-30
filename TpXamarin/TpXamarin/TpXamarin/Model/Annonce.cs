@@ -85,17 +85,13 @@ namespace TpXamarin.Model
             set { user = value; }
         }
 
-        //event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
-        //{
-        //    add
-        //    {
-        //        throw new System.NotImplementedException();
-        //    }
+        private string username;
 
-        //    remove
-        //    {
-        //        throw new System.NotImplementedException();
-        //    }
-        //}
+        [NotNull]
+        public string UserName
+        {
+            get { return username; }
+            set { username = value; }
+        }
     }
 }
