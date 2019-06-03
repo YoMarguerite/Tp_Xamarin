@@ -38,6 +38,12 @@ namespace TpXamarin
         {
             await this.Navigation.PushAsync(new MyAnnonce());
         }
-        
+
+        private async void Button_Clicked_1(object sender, EventArgs e)
+        {
+            UtilisateurActif.Utilisateur = null;
+            Navigation.InsertPageBefore(new MainPage(), this);
+            await Navigation.PopAsync();
+        }
     }
 }

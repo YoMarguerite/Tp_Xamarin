@@ -5,36 +5,41 @@
   <ContentPage.Content>
       <StackLayout>
             <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Text="Mes annonces" Clicked="Button_Clicked"></Button>
-                <Entry Grid.Column="1" x:Name="recherche" Placeholder="Rechercher" PropertyChanging="Entry_PropertyChanging"/>
+                <Label Text="Liste des Annonces" Grid.Row="0" Grid.Column="0" FontSize="Large" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                <Button Grid.Row="0" Grid.Column="1" Text="Déconnexion" Clicked="Button_Clicked_1"/>
+                <Button Grid.Row="1" Grid.Column="0" Text="Mes annonces" Clicked="Button_Clicked"/>
+                <Entry Grid.Row="1" Grid.Column="1" x:Name="recherche" Placeholder="Rechercher" PropertyChanging="Entry_PropertyChanging"/>
             </Grid>
-            <ListView x:Name="AnnonceList" >
+            <ListView x:Name="AnnonceList" HasUnevenRows="True" ItemTapped="AnnonceList_ItemTapped">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <ViewCell.View>
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    
-                                    <Label Grid.Column="0" Grid.Row="0" Text="{Binding Titre}"/>
-                                    <Label Grid.Column="1" Grid.Row="0" Text="{Binding Prix, StringFormat='\{0:C2\}'}"/>
-                                    <Label Grid.ColumnSpan="2" Grid.Row="1" Text="{Binding Categorie}"/>
-                                    <Label Grid.Column="0" Grid.Row="2" Text="{Binding Date, StringFormat='Publié le \{0:dddd dd MMMM yyyy}'}"/>
-                                    <Label Grid.Column="1" Grid.Row="2" Text="{Binding UserName, StringFormat='Publié par '}"/>
-                                </Grid>
-                            </ViewCell.View>
+                            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Grid.Row="0" Text="{Binding Titre}"/>
+                                <Label Grid.Column="1" Grid.Row="0" Text="{Binding Prix, StringFormat='\{0:C2\}'}"/>
+                                <Label Grid.Column="2" Grid.Row="0" Text="{Binding Date}"/>
+                                <Label Grid.ColumnSpan="2" Grid.Row="1" Text="{Binding Categorie}"/>
+                                <Label Grid.Column="2" Grid.Row="1" Text="{Binding UserName}"/>
+                                <Label Grid.ColumnSpan="3" Grid.Row="2" Text="{Binding Description}"/>
+                            </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

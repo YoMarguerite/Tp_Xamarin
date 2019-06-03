@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Security.Cryptography;
 using TpXamarin.DAL;
 using TpXamarin.Model;
 using Xamarin.Forms;
@@ -10,7 +8,7 @@ using Xamarin.Forms.Xaml;
 
 namespace TpXamarin
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class Inscription : ContentPage
 	{
         UtilisateurDataAccess utilisateurData;
@@ -25,15 +23,21 @@ namespace TpXamarin
         {
             if (VerifEntry())
             {
-                var user = new Utilisateur
+                using (MD5 md5Hash = MD5.Create())
                 {
-                    Nom = nom.Text,
-                    Prenom = prenom.Text,
-                    Login = login.Text,
-                    Mdp = mdp.Text
-                };
-                user.ID = utilisateurData.SaveUtilisateur(user);
-                UtilisateurActif.Utilisateur = user;
+                    string hash = utilisateurData.GetMd5Hash(md5Hash, mdp.Text);
+
+                    var user = new Utilisateur
+                    {
+                        Nom = nom.Text,
+                        Prenom = prenom.Text,
+                        Login = login.Text,
+                        Mdp = hash
+                    };
+                    user.ID = utilisateurData.SaveUtilisateur(user);
+                    UtilisateurActif.Utilisateur = user;
+                }
+
                 Navigation.InsertPageBefore(new ListeProduit(), this);
                 await Navigation.PopAsync();
             }
@@ -43,7 +47,7 @@ namespace TpXamarin
         {
             bool verif = true;
 
-            if (nom.Text == "")
+            if ((nom.Text == null)|| (nom.Text == ""))
             {
                 errornom.Text = "Veuillez remplir ce champ";
                 verif = false;
@@ -53,7 +57,7 @@ namespace TpXamarin
                 errornom.Text = "";
             }
 
-            if (prenom.Text == "")
+            if ((prenom.Text == null)||(prenom.Text == ""))
             {
                 errorprenom.Text = "Veuillez remplir ce champ";
                 verif = false;
@@ -63,7 +67,7 @@ namespace TpXamarin
                 errorprenom.Text = ""; 
             }
             
-            if (login.Text == "")
+            if ((login.Text == null)||(login.Text == ""))
             {
                 errorlogin.Text = "Veuillez remplir ce champ";
                 verif = false;
@@ -78,9 +82,9 @@ namespace TpXamarin
                 errorlogin.Text = "";
             }
 
-            if (mdp.Text == "")
+            if ((mdp.Text == null)||(mdp.Text.Count() < 8))
             {
-                errormdp.Text = "Veuillez remplir ce champ";
+                errormdp.Text = "Le mot de passe doit être composé de au moins 8 caractères.";
                 verif = false;
             }
             else

@@ -22,9 +22,15 @@ namespace TpXamarin
             Annonce.BindingContext = annonce;
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
+        private async void Button_Clicked(object sender, EventArgs e)
         {
-            Device.OpenUri(new Uri(annonce.Contact));
+            try
+            {
+                Device.OpenUri(new Uri("tel:" + annonce.Contact));
+            }catch(Exception ex)
+            {
+                await DisplayAlert("Erreur", ex.Message, "OK");
+            }            
         }
     }
 }

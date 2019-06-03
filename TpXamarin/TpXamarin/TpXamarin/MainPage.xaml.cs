@@ -14,10 +14,9 @@ namespace TpXamarin
             this.Navigation.PopAsync(true);
             InitializeComponent();
             UtilisateurData = new UtilisateurDataAccess();
-            foreach(Utilisateur user in UtilisateurData.GetUtilisateurs())
-            {
-                error.Text += "login : " + user.Login + " , mdp : " + user.Mdp;
-            }
+
+            login.Text = "Yoann";
+            password.Text = "sohcahtoa";
         }
 
         private async void Button_Clicked(object sender, EventArgs e)

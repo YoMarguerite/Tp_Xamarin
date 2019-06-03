@@ -20,7 +20,7 @@ namespace TpXamarin
         {
             database =  DependencyService.Get<IDatabaseConnection>().DbConnection();
             database.CreateTable<Annonce>();
-            Console.WriteLine("hoofjf");
+
             this.Annonces = new ObservableCollection<Annonce>(database.Table<Annonce>());
 
             if (!database.Table<Annonce>().Any())
@@ -36,11 +36,11 @@ namespace TpXamarin
                 Titre = "Titre...",
                 Description = "Description...",
                 Prix = 500,
-                Contact = "Numéro de téléphone...",
+                Contact = "0782507093",
                 Categorie = "Console & Jeux Vidéos",
-                Date = new DateTime().ToString(),
+                Date = String.Format("Publié le {0:dd/MM/yy}", DateTime.Today),
                 User = 0,
-                UserName = "Nobody"
+                UserName = "Publié par Nobody"
             });
             this.Annonces.Add(GetAnnonce(i));
         }

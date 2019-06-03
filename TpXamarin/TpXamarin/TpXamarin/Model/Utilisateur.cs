@@ -52,5 +52,6 @@ namespace TpXamarin.Model
         {
             get { return mdp; }
             set { mdp = value; }
-        }    }
+        }
+    }
 }

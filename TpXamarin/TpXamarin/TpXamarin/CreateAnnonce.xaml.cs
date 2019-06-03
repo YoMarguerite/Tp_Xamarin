@@ -36,9 +36,9 @@ namespace TpXamarin
                         Prix = double.Parse(prix.Text),
                         Contact = contact.Text,
                         Categorie = categorie.SelectedItem.ToString(),
-                        Date = new DateTime().ToString(),
+                        Date = String.Format("Publié le {0:dd/MM/yy}", DateTime.Today),
                         User = UtilisateurActif.Utilisateur.ID,
-                        UserName = UtilisateurActif.Utilisateur.Prenom + " " + UtilisateurActif.Utilisateur.Nom
+                        UserName = "Publié par "+UtilisateurActif.Utilisateur.Prenom + " " + UtilisateurActif.Utilisateur.Nom
                     });
                     annonceList.ItemsSource = annonceData.MyAnnonces(UtilisateurActif.Utilisateur.ID);
                     await DisplayAlert("Nouvelle Annonce", "Votre Annonce '" + titre.Text + "' a bien été créée", "Youpi !");
@@ -54,7 +54,7 @@ namespace TpXamarin
         {
             bool verif = true;
 
-            if (titre.Text == null)
+            if ((titre.Text == null)||(titre.Text == ""))
             {
                 errortitre.Text = "Veuillez remplir ce champ";
                 verif = false;
@@ -64,17 +64,7 @@ namespace TpXamarin
                 errortitre.Text = "";
             }
 
-            if (description.Text == null)
-            {
-                errordescription.Text = "Veuillez remplir ce champ";
-                verif = false;
-            }
-            else
-            {
-                errordescription.Text = "";
-            }
-
-            if (prix.Text == null)
+            if ((prix.Text == null)||(prix.Text == ""))
             {
                 errorprix.Text = "Veuillez remplir ce champ";
                 verif = false;
@@ -84,7 +74,7 @@ namespace TpXamarin
                 errorprix.Text = "";
             }
 
-            if (contact.Text == null)
+            if ((contact.Text == null)||(contact.Text == ""))
             {
                 errorcontact.Text = "Veuillez remplir ce champ";
                 verif = false;

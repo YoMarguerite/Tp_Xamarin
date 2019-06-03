@@ -85,8 +85,9 @@ namespace TpXamarin.Model
             set { user = value; }
         }
 
-        private string username;
 
+        private string username;
+        
         [NotNull]
         public string UserName
         {
